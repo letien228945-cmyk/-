@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>🌸 Thiệp 20/10 Siêu Cấp Lung Linh 💖 By Lê Tiến</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      overflow: hidden;
+      height: 100vh;
+      background: linear-gradient(270deg, #ffb6c1, #ffc0cb, #ff69b4, #ff1493);
+      background-size: 800% 800%;
+      animation: gradientBG 12s ease infinite;
+      font-family: 'Segoe Script', cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      color: #fff;
+      border: 8px solid transparent;
+      border-radius: 20px;
+      animation: borderGlow 6s linear infinite;
+      position: relative;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes borderGlow {
+      0%,100% { border-color: #ff69b4; box-shadow: 0 0 30px #ff69b4; }
+      25% { border-color: #ffd700; box-shadow: 0 0 30px #ffd700; }
+      50% { border-color: #ff1493; box-shadow: 0 0 30px #ff1493; }
+      75% { border-color: #ffb6c1; box-shadow: 0 0 30px #ffb6c1; }
+    }
+
+    h1 {
+      font-size: 55px;
+      text-shadow: 0 0 15px #fff, 0 0 30px #ff69b4, 0 0 45px #ff1493;
+      animation: glow 2s ease-in-out infinite alternate, moveText 3s ease-in-out infinite alternate;
+      z-index: 3;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #fff, 0 0 25px #ff69b4; }
+      to { text-shadow: 0 0 25px #ff1493, 0 0 50px #ff69b4; }
+    }
+
+    @keyframes moveText {
+      from { transform: translateY(-5px); }
+      to { transform: translateY(5px); }
+    }
+
+    #message {
+      font-size: 22px;
+      width: 80%;
+      max-width: 700px;
+      margin-top: 20px;
+      line-height: 1.6;
+      opacity: 0;
+      white-space: pre-line;
+      transition: opacity 1s ease-in-out;
+      z-index: 3;
+    }
+
+    button {
+      margin-top: 40px;
+      background: #ff69b4;
+      border: none;
+      padding: 15px 40px;
+      border-radius: 50px;
+      color: white;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: 0.3s;
+      z-index: 4;
+    }
+
+    button:hover { transform: scale(1.1); background: #ff85c1; }
+
+    .emoji {
+      position: fixed;
+      top: -50px;
+      font-size: 30px;
+      animation: fall linear forwards;
+      pointer-events: none;
+      user-select: none;
+      z-index: 2;
+    }
+
+    @keyframes fall {
+      to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    .heart {
+      position: fixed;
+      bottom: 0;
+      font-size: 25px;
+      color: #ff1493;
+      opacity: 0.8;
+      animation: rise 6s linear forwards;
+      z-index: 2;
+    }
+
+    @keyframes rise {
+      to { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+    }
+
+    #credit {
+      position: fixed;
+      bottom: 20px;
+      font-size: 22px;
+      color: #fff;
+      text-shadow: 0 0 10px #ff69b4, 0 0 25px #ff1493;
+      opacity: 0;
+      animation: fadeInUp 3s ease forwards;
+      animation-delay: 6s;
+      z-index: 3;
+    }
+
+    @keyframes fadeInUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    #footer-text {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      font-size: 20px;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      padding: 10px 0;
+      animation: marquee 15s linear infinite;
+      white-space: nowrap;
+      z-index: 3;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(100%); }
+      to { transform: translateX(-100%); }
+    }
+
+    .light-sweep {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: sweep 5s infinite;
+      z-index: 2;
+    }
+
+    @keyframes sweep {
+      0% { left: -100%; }
+      50% { left: 120%; }
+      100% { left: 120%; }
+    }
+
+    canvas {
+      position: fixed;
+      top: 0; left: 0;
+      z-index: 1;
+    }
+
+    audio { display: none; }
+  </style>
+</head>
+<body>
+  <div class="light-sweep"></div>
+  <canvas id="fireworks"></canvas>
+
+  <h1>💐 Chúc Mừng Ngày Phụ Nữ Việt Nam 20/10 💐</h1>
+  <p id="message"></p>
+  <button onclick="startShow()">💝 Bấm để nhận điều bất ngờ 💝</button>
+  <div id="credit">✨ By Lê Tiến ✨</div>
+  <div id="footer-text">🌸 Chúc bạn luôn xinh đẹp – hạnh phúc – thành công – yêu đời mỗi ngày 💕</div>
+
+  <audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9b25a1a3c1.mp3?filename=romantic-piano-112191.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const messageText = `Chúc bạn ngày 20/10 thật xinh đẹp 🌸
+Luôn mỉm cười rạng rỡ như hoa hồng 💖
+Hạnh phúc, bình an và được yêu thương mỗi ngày 💕
+Bạn xứng đáng với tất cả những điều tuyệt vời nhất 🌷`;
+
+    const emojis = ["💖","🎀","🌼","🌻","🌷","🌺","🌹","🥀","🪴","💞","💐","✨","🌸"];
+
+    function typeMessage() {
+      const msg = document.getElementById("message");
+      msg.style.opacity = 1;
+      let i = 0;
+      const interval = setInterval(() => {
+        msg.textContent = messageText.slice(0, i++);
+        if (i > messageText.length) clearInterval(interval);
+      }, 70);
+    }
+
+    function createEmoji() {
+      for (let j = 0; j < 5; j++) {
+        const emoji = document.createElement('div');
+        emoji.classList.add('emoji');
+        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        emoji.style.left = Math.random() * window.innerWidth + 'px';
+        emoji.style.fontSize = (20 + Math.random() * 35) + 'px';
+        emoji.style.animationDuration = (3 + Math.random() * 4) + 's';
+        document.body.appendChild(emoji);
+        setTimeout(() => emoji.remove(), 7000);
+      }
+    }
+
+    function createHearts() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.textContent = '💖';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (15 + Math.random() * 25) + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+
+    // 🎆 Pháo hoa
+    const canvas = document.getElementById('fireworks');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function random(min, max) { return Math.random() * (max - min) + min; }
+
+    class Particle {
+      constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.radius = random(1, 3);
+        this.speedX = random(-3, 3);
+        this.speedY = random(-3, 3);
+        this.life = 100;
+      }
+      update() { this.x += this.speedX; this.y += this.speedY; this.life -= 1; }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+    }
+
+    function createFirework(x = random(0, canvas.width), y = random(100, canvas.height / 2)) {
+      const colors = ["#ff69b4", "#ff1493", "#ffd700", "#ff7f50", "#ffb6c1"];
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      for (let i = 0; i < 50; i++) { particles.push(new Particle(x, y, color)); }
+    }
+
+    function animateFireworks() {
+      ctx.fillStyle = "rgba(0,0,0,0.2)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p, i) => {
+        p.update(); p.draw();
+        if (p.life <= 0) particles.splice(i, 1);
+      });
+      requestAnimationFrame(animateFireworks);
+    }
+
+    canvas.addEventListener('click', e => createFirework(e.clientX, e.clientY));
+
+    function startShow() {
+      document.querySelector('button').style.display = 'none';
+      document.getElementById('bgMusic').play();
+      typeMessage();
+      setInterval(createEmoji, 200);
+      setInterval(createFirework, 700);
+      setInterval(createHearts, 400);
+      animateFireworks();
+    }
+  </script>
+</body>
+</html>
